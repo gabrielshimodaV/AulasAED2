@@ -1,0 +1,228 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "id": "c013c909-3a6b-4f4b-89b9-bb433ababbf1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Implementacao da classe Pilha\n",
+    "class Stack:\n",
+    "    # Inicia com uma pilha vazia\n",
+    "    def __init__(self):\n",
+    "        self.itens = []\n",
+    "    \n",
+    "    # Verifica se pilha esta vazia\n",
+    "    def is_empty(self):\n",
+    "        return self.itens == []\n",
+    "    \n",
+    "    # Adiciona elemento no topo (topo e o final da lista)\n",
+    "    def push(self, item):\n",
+    "        self.itens.append(item)\n",
+    "        print(f\"PUSH {item}\") \n",
+    "\n",
+    "    # Remove elemento do topo (final da lista)\n",
+    "    def pop(self):\n",
+    "        print(\"POP\")\n",
+    "        return self.itens.pop()\n",
+    "    \n",
+    "    # Obtem o elemento do topo (mas nao remove)\n",
+    "    def peek(self):\n",
+    "    # Em Python, indice -1 retorna ultimo elemento (topo)\n",
+    "        return self.itens[-1]\n",
+    "    \n",
+    "    # Retorna o numero de elementos da pilha\n",
+    "    def size(self):\n",
+    "        return len(self.itens)\n",
+    "    \n",
+    "    # Imprime pilha na tela\n",
+    "    def print_stack(self):\n",
+    "        print(self.itens)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "id": "6ad890bd-4992-4619-93a6-f76bfeefa8e4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "id": "603c10fd-4333-485f-ad51-7883516a7bba",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Pilha:\n",
+    "    def __init__(self, capacidade):\n",
+    "        self.__capacidade = capacidade\n",
+    "        self.__topo = -1\n",
+    "        self.__valores = np.zeros(self.__capacidade, dtype=int)\n",
+    "\n",
+    "    def __pilha_cheia(self):\n",
+    "        if self.__topo == self.__capacidade - 1:\n",
+    "            return True\n",
+    "        else:\n",
+    "            return False\n",
+    "    \n",
+    "    def __pilha_vazia(self):\n",
+    "        if self.__topo == -1:\n",
+    "            return True\n",
+    "        else:\n",
+    "            return False\n",
+    "    \n",
+    "    def empilhar(self, valor):\n",
+    "        if self.__pilha_cheia():\n",
+    "            print('A pilha está cheia')\n",
+    "        else:\n",
+    "            self.__topo += 1\n",
+    "            self.__valores[self.__topo] = valor\n",
+    "    \n",
+    "    def desempilhar(self):\n",
+    "        if self.__pilha_vazia():\n",
+    "            print('A pilha está vazia')\n",
+    "        else:\n",
+    "            self.__valores[self.__topo] = 0\n",
+    "            self.__topo -= 1\n",
+    "    \n",
+    "    def ver_topo(self):\n",
+    "        if self.__topo != -1:\n",
+    "            return self.__valores[self.__topo]\n",
+    "        else:\n",
+    "            return -1\n",
+    "    \n",
+    "    # Imprime pilha na tela\n",
+    "    def imprime_pilha(self):\n",
+    "        print(self.__valores)"
+   ]
+  },
+  {
+   "cell_type": "raw",
+   "id": "3f083851-bcaa-4848-a15f-1ef0e8eafc22",
+   "metadata": {},
+   "source": [
+    "Exercício"
+   ]
+  },
+  {
+   "cell_type": "raw",
+   "id": "6d5d8ae4-cd86-4cef-9692-d45133d83534",
+   "metadata": {},
+   "source": [
+    "Utilização de pilhas para conversão de números inteiros em decimal para binário (método da divisão sucessiva por 2)."
+   ]
+  },
+  {
+   "cell_type": "raw",
+   "id": "eaaa7df3-945c-42ed-bd9f-2f92b4072b34",
+   "metadata": {},
+   "source": [
+    "Utilização do classe Stack.."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "9d50488f-ea07-4998-a59e-7c877870b0ab",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Função que converte um número decimal para binário\n",
+    "def decimal2binario(decimal):\n",
+    "    p = Stack()\n",
+    "    while decimal > 0:\n",
+    "        resto = decimal % 2\n",
+    "        p.push(resto)\n",
+    "        decimal = decimal // 2\n",
+    "    binario = ''\n",
+    "    while not p.is_empty():\n",
+    "        binario = binario + str(p.pop())\n",
+    "    return binario"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b4ec1d85-c438-4627-8881-12e98a5f8ebc",
+   "metadata": {},
+   "source": [
+    "### TESTANDO!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "id": "e2dc2fd3-8861-45e8-b5d2-ed95ff415e47",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Digite o valor decimal:  233\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "PUSH 1\n",
+      "PUSH 0\n",
+      "PUSH 0\n",
+      "PUSH 1\n",
+      "PUSH 0\n",
+      "PUSH 1\n",
+      "PUSH 1\n",
+      "PUSH 1\n",
+      "POP\n",
+      "POP\n",
+      "POP\n",
+      "POP\n",
+      "POP\n",
+      "POP\n",
+      "POP\n",
+      "POP\n",
+      "O valor 233 em binário é 11101001\n"
+     ]
+    }
+   ],
+   "source": [
+    "valor = int(input(\"Digite o valor decimal: \"))\n",
+    "print(f\"O valor {valor} em binário é {decimal2binario(valor)}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "93d7b317-a34e-48e6-9913-49db1b860eeb",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
